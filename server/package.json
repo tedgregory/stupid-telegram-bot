@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.ts",
   "type": "module",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "scripts": {
     "dev": "npx nodemon",
     "build": "rimraf ./build && npx tsc",
@@ -25,6 +30,7 @@
     "eslint-plugin-n": "^15.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.2",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.1",
     "rimraf": "^3.0.2",
