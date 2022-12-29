@@ -1,9 +1,9 @@
 import TelegramBot from 'node-telegram-bot-api';
 
 export const BOT_COMMANDS = [
-  { command: '/start', description: 'Start working' },
-  { command: '/info', description: 'About and options' },
-  { command: '/game', description: 'Play stupid game' },
+  { command: '/start', description: 'Для начала' },
+  { command: '/info', description: 'Информация и возможности' },
+  { command: '/game', description: 'Тупая игра' },
 ];
 
 export const BOT_GAME1_OPTIONS: TelegramBot.SendMessageOptions = {
@@ -12,7 +12,7 @@ export const BOT_GAME1_OPTIONS: TelegramBot.SendMessageOptions = {
       [
         { text: '1', callback_data: '1' },
         { text: '2', callback_data: '2' },
-        { text: '2', callback_data: '2' },
+        { text: '3', callback_data: '3' },
       ],
       [
         { text: '4', callback_data: '4' },

@@ -14,11 +14,15 @@ let games: Game1Type[] = [];
 const startGame = async (id: number) => {
   const game = games.find((g) => g.chatId === id);
   if (game) {
-    await bot.sendMessage(game.chatId, `You're in the game, you're in the game... keep on playing`);
+    await bot.sendMessage(game.chatId, `Ты уже в игре... бейся до финала`);
   }
   const number = Math.floor(Math.random() * 10);
   games.push({ chatId: id, number });
-  await bot.sendMessage(id, `I picked a number 0 to 9, guess it!`, BOT_GAME1_OPTIONS);
+  await bot.sendMessage(
+    id,
+    `Я загадал число от 0 до 9, отгадай! (Да, пока так, и че)`,
+    BOT_GAME1_OPTIONS
+  );
 };
 
 const handleGame1 = async (msg: TelegramBot.CallbackQuery) => {
@@ -36,19 +40,13 @@ const handleGame1 = async (msg: TelegramBot.CallbackQuery) => {
           cid,
           'https://tlgrm.eu/_/stickers/8a1/9aa/8a19aab4-98c0-37cb-a3d4-491cb94d7e12/3.webp'
         );
-        await bot.sendMessage(game.chatId, `Yep, ${username}, it is ${game.number}`);
+        await bot.sendMessage(game.chatId, `Да, ${username}, это ${game.number}`);
         games = games.filter((g) => g.chatId !== cid);
         return;
       }
-      await bot.sendMessage(game.chatId, `Nope, ${username}, try again`, BOT_GAME1_OPTIONS);
+      await bot.sendMessage(game.chatId, `Нет, ${username}, подумай`, BOT_GAME1_OPTIONS);
       return;
     }
-    await bot.sendMessage(
-      game.chatId,
-      `You're in the game, ${username}, you're in the game... keep on playing`,
-      BOT_GAME1_OPTIONS
-    );
-    return;
   }
 };
 
@@ -61,7 +59,7 @@ const start = async () => {
 
     switch (text) {
       case '/start': {
-        bot.sendMessage(id, `Hello, ${first_name}!`);
+        bot.sendMessage(id, `Здарова, ${first_name}!`);
         break;
       }
       case '/info': {
@@ -69,7 +67,10 @@ const start = async () => {
           id,
           'https://tlgrm.eu/_/stickers/8a1/9aa/8a19aab4-98c0-37cb-a3d4-491cb94d7e12/1.webp'
         );
-        bot.sendMessage(id, `This is a test bot playground, ${username}`);
+        bot.sendMessage(
+          id,
+          `Я бесполезный тупорылый бот, понимаешь, ${username}? Потом хозяин обещал прокачать.`
+        );
         break;
       }
       case '/game': {
