@@ -45,13 +45,12 @@ const handleGame1 = async (msg: TelegramBot.CallbackQuery) => {
         return;
       }
       await bot.sendMessage(game.chatId, `Нет, ${username}, подумай`, BOT_GAME1_OPTIONS);
-      return;
     }
   }
 };
 
 const start = async () => {
-  bot.setMyCommands(BOT_COMMANDS);
+  await bot.setMyCommands(BOT_COMMANDS);
 
   bot.on('message', async (msg) => {
     const { text } = msg;
@@ -59,15 +58,15 @@ const start = async () => {
 
     switch (text) {
       case '/start': {
-        bot.sendMessage(id, `Здарова, ${first_name}!`);
+        await bot.sendMessage(id, `Здарова, ${first_name}!`);
         break;
       }
       case '/info': {
-        bot.sendSticker(
+        await bot.sendSticker(
           id,
           'https://tlgrm.eu/_/stickers/8a1/9aa/8a19aab4-98c0-37cb-a3d4-491cb94d7e12/1.webp'
         );
-        bot.sendMessage(
+        await bot.sendMessage(
           id,
           `Я бесполезный тупорылый бот, понимаешь, ${username}? Потом хозяин обещал прокачать.`
         );
@@ -77,13 +76,13 @@ const start = async () => {
         await startGame(id);
       }
       default: {
-        return;
+        return null;
       }
     }
   });
 
   bot.on('callback_query', async (msg) => {
-    return handleGame1(msg);
+    await handleGame1(msg);
   });
 };
 
