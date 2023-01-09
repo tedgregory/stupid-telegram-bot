@@ -87,3 +87,13 @@ const start = async () => {
 };
 
 start();
+
+export function handleQuit() {
+  process
+    .on('exit', (code) => {
+      process.exit(code);
+    })
+    .on('SIGINT', () => {
+      process.exit(0);
+    });
+}
