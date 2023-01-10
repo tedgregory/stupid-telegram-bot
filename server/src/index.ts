@@ -15,6 +15,7 @@ const startGame = async (id: number) => {
   const game = games.find((g) => g.chatId === id);
   if (game) {
     await bot.sendMessage(game.chatId, `Ты уже в игре... бейся до финала`);
+    return;
   }
   const number = Math.floor(Math.random() * 10);
   games.push({ chatId: id, number });
@@ -84,16 +85,9 @@ const start = async () => {
   bot.on('callback_query', async (msg) => {
     await handleGame1(msg);
   });
+
+  process.once('SIGINT', () => bot.logOut());
+  process.once('SIGTERM', () => bot.logOut());
 };
 
 start();
-
-export function handleQuit() {
-  process
-    .on('exit', (code) => {
-      process.exit(code);
-    })
-    .on('SIGINT', () => {
-      process.exit(0);
-    });
-}
