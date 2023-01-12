@@ -52,7 +52,7 @@ const handleGame1 = async (msg: TelegramBot.CallbackQuery) => {
 
 const start = async () => {
   await bot.setMyCommands(BOT_COMMANDS);
-
+  console.log('Bot started');
   bot.on('message', async (msg) => {
     const { text } = msg;
     const { id, username, first_name } = msg.chat;
